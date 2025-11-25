@@ -1,0 +1,9 @@
+package com.example.localeventfinder.data;
+
+/**
+ * This file is intentionally a placeholder to prevent build errors.
+ * It was part of an old database implementation and is no longer in use.
+ */
+public abstract class AppDatabase {
+    // This class is intentionally left empty.
+}
