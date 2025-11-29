@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.localeventhub.R;
@@ -37,77 +37,48 @@ public class MainActivity extends AppCompatActivity {
         username = intent.getStringExtra("USERNAME");
         
         TextView tvWelcome = findViewById(R.id.tvWelcome);
-        tvWelcome.setText("Welcome, " + username + "!\nRole: " + userRole);
+        tvWelcome.setText("Welcome, " + username + "!");
         
         // Set activity title
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Local Event Hub - " + userRole);
+            getSupportActionBar().setTitle("Local Event Hub");
         }
     }
     
     private void setupUI() {
-        Button btnAdminPanel = findViewById(R.id.btnAdminPanel);
-        Button btnCreateEvent = findViewById(R.id.btnCreateEvent);
-        Button btnViewEvents = findViewById(R.id.btnViewEvents);
-        Button btnEventDetails = findViewById(R.id.btnEventDetails);
-        Button btnDebug = findViewById(R.id.btnDebug);
-        Button btnFavorites = findViewById(R.id.btnFavorites);
+        CardView cardViewEvents = findViewById(R.id.cardViewEvents);
+        CardView cardFavorites = findViewById(R.id.cardFavorites);
+        CardView cardCreateEvent = findViewById(R.id.cardCreateEvent);
+        CardView cardAdminPanel = findViewById(R.id.cardAdminPanel);
 
-        // Show admin button only for admin users
+        // Role-specific visibility
         if ("admin".equals(userRole)) {
-            btnAdminPanel.setVisibility(android.view.View.VISIBLE);
-            btnAdminPanel.setOnClickListener(v -> {
-                Intent intent = new Intent(this, AdminPanelActivity.class);
-                startActivity(intent);
-            });
-        } else {
-            btnAdminPanel.setVisibility(android.view.View.GONE);
+            cardAdminPanel.setVisibility(View.VISIBLE);
+        } else if ("organizer".equals(userRole)) {
+            cardCreateEvent.setVisibility(View.VISIBLE);
         }
-        
-        // Show create event button for organizers
-        if ("organizer".equals(userRole)) {
-            btnCreateEvent.setVisibility(android.view.View.VISIBLE);
-            btnCreateEvent.setOnClickListener(v -> {
-                Intent intent = new Intent(this, CreateEditEventActivity.class);
-                intent.putExtra("USER_ID", userId);
-                intent.putExtra("USER_ROLE", userRole);
-                intent.putExtra("MODE", "create");
-                startActivity(intent);
-            });
-        } else {
-            btnCreateEvent.setVisibility(android.view.View.GONE);
-        }
-        
-        // All users can view events
-        btnViewEvents.setOnClickListener(v -> {
+
+        // Click Listeners
+        cardViewEvents.setOnClickListener(v -> {
             Intent intent = new Intent(this, EventListActivity.class);
+            startActivity(intent);
+        });
+
+        cardFavorites.setOnClickListener(v -> {
+            Intent intent = new Intent(this, FavoritesActivity.class);
+            startActivity(intent);
+        });
+
+        cardCreateEvent.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CreateEditEventActivity.class);
             intent.putExtra("USER_ID", userId);
             intent.putExtra("USER_ROLE", userRole);
-            startActivity(intent);
-        });
-        
-        btnEventDetails.setOnClickListener(v -> {
-            Intent intent = new Intent(this, EventDetailActivity.class);
+            intent.putExtra("MODE", "create");
             startActivity(intent);
         });
 
-        btnDebug.setOnClickListener(v -> {
-            // Quick debug to see what's in the database
-            eventViewModel.getAllApprovedEvents().observe(this, events -> {
-                if (events != null) {
-                    Toast.makeText(this, "Approved events: " + events.size(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            eventViewModel.getPendingEvents().observe(this, events -> {
-                if (events != null) {
-                    Toast.makeText(this, "Pending events: " + events.size(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        });
-
-        btnFavorites.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FavoritesActivity.class);
+        cardAdminPanel.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AdminPanelActivity.class);
             startActivity(intent);
         });
     }

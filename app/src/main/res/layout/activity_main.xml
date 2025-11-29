@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,87 +15,146 @@
             android:id="@+id/tvWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome"
-            android:textSize="24sp"
+            android:text="Welcome, User!"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="32dp"
-            android:lineSpacingExtra="8sp" />
+            android:textColor="@color/purple_700"
+            android:layout_marginBottom="24dp"/>
 
-        <TextView
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quick Actions"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:columnCount="2"
+            android:rowCount="3"
+            android:useDefaultMargins="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
-
-            <Button
-                android:id="@+id/btnCreateEvent"
+            <!-- View Events Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewEvents"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Create Event"
-                android:layout_marginEnd="8dp"
-                android:visibility="gone" />
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-            <Button
-                android:id="@+id/btnAdminPanel"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_menu_today" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Events"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Favorites Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardFavorites"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Admin Panel"
-                android:layout_marginStart="8dp"
-                android:visibility="gone" />
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center">
 
-        <Button
-            android:id="@+id/btnViewEvents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="📅 View All Events"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/star_on" />
 
-        <Button
-            android:id="@+id/btnEventDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🔍 Event Details Demo"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Favorites"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/btnFavorites"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="❤️ My Favorites"
-            android:textSize="16sp"
-            android:backgroundTint="@color/red"
-            android:layout_marginBottom="8dp" />
+            <!-- Create Event Card (Organizer) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCreateEvent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:visibility="gone">
 
-        <Button
-            android:id="@+id/btnDebug"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🐞 Debug DB" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="App Status: ✅ Working"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:textColor="@color/green"
-            android:layout_marginTop="24dp" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_menu_add" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Create Event"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Admin Panel Card (Admin) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAdminPanel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_lock_lock" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Admin Panel"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
 
     </LinearLayout>
-
 </ScrollView>

@@ -16,7 +16,7 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private List<Event> events = new ArrayList<>();
     private OnItemClickListener listener;
-    
+
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -24,50 +24,52 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 .inflate(R.layout.item_event, parent, false);
         return new EventViewHolder(view);
     }
-    
+
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = events.get(position);
         holder.bind(event);
-        
+
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(event);
             }
         });
     }
-    
+
     @Override
     public int getItemCount() {
         return events.size();
     }
-    
+
     public void setEvents(List<Event> events) {
         this.events = events;
         notifyDataSetChanged();
     }
-    
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
-    
+
     static class EventViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTitle, tvDate, tvDistrict;
-        
+        private TextView tvTitle, tvDate, tvDistrict, tvFavoriteIndicator;
+
         EventViewHolder(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvEventTitle);
             tvDate = itemView.findViewById(R.id.tvEventDate);
             tvDistrict = itemView.findViewById(R.id.tvEventDistrict);
+            tvFavoriteIndicator = itemView.findViewById(R.id.tvFavoriteIndicator);
         }
-        
+
         void bind(Event event) {
             tvTitle.setText(event.getTitle());
-            tvDate.setText(event.getDate());
-            tvDistrict.setText(event.getDistrict());
+            tvDate.setText("📅 " + event.getDate());
+            tvDistrict.setText("🏘️ " + event.getDistrict());
+            tvFavoriteIndicator.setVisibility(event.isFavorite() ? View.VISIBLE : View.GONE);
         }
     }
-    
+
     public interface OnItemClickListener {
         void onItemClick(Event event);
     }
