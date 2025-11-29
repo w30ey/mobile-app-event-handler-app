@@ -25,6 +25,7 @@
         <activity android:name=".activities.CreateEditEventActivity" />
         <activity android:name=".activities.AdminPanelActivity" />
         <activity android:name=".activities.EventListActivity" />
+        <activity android:name=".activities.FavoritesActivity" />
     </application>
 
 </manifest>

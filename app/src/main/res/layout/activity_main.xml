@@ -71,6 +71,15 @@
             android:layout_marginBottom="16dp" />
 
         <Button
+            android:id="@+id/btnFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="❤️ My Favorites"
+            android:textSize="16sp"
+            android:backgroundTint="@color/red"
+            android:layout_marginBottom="8dp" />
+
+        <Button
             android:id="@+id/btnDebug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

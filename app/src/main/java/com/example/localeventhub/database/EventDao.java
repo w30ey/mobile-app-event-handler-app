@@ -31,4 +31,6 @@ public interface EventDao {
     LiveData<List<Event>> getEventsByDistrict(String district);
     @Query("UPDATE events SET favorite = :isFavorite WHERE id = :eventId")
     void updateFavoriteStatus(int eventId, boolean isFavorite);
+    @Query("SELECT * FROM events WHERE favorite = 1 AND approved = 1")
+    LiveData<List<Event>> getFavoriteEvents();
 }

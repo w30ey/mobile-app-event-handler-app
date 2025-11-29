@@ -13,40 +13,72 @@ import com.example.localeventhub.viewmodels.EventViewModel;
 
 public class EventDetailActivity extends AppCompatActivity {
     private EventViewModel eventViewModel;
-    
+    private int eventId;
+    private Event currentEvent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
-        
-        initializeViews();
+
+        setTitle("Event Details");
         setupViewModel();
-        displayEventDetails();
+        loadEventDetails();
     }
-    
-    private void initializeViews() {
-        Button btnFavorite = findViewById(R.id.btnFavorite);
-        btnFavorite.setOnClickListener(v -> {
-            Toast.makeText(this, "Favorite feature coming soon!", Toast.LENGTH_SHORT).show();
-        });
-    }
-    
+
     private void setupViewModel() {
         eventViewModel = new ViewModelProvider(this).get(EventViewModel.class);
     }
-    
-    private void displayEventDetails() {
-        // For now, show static data
+
+    private void loadEventDetails() {
+        eventId = getIntent().getIntExtra("EVENT_ID", -1);
+        if (eventId == -1) {
+            Toast.makeText(this, "Error: Event not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        eventViewModel.getEventById(eventId).observe(this, event -> {
+            if (event != null) {
+                currentEvent = event;
+                displayEventDetails(event);
+                setupFavoriteButton(event);
+            }
+        });
+    }
+
+    private void displayEventDetails(Event event) {
         TextView tvTitle = findViewById(R.id.tvEventTitle);
         TextView tvDescription = findViewById(R.id.tvEventDescription);
         TextView tvDate = findViewById(R.id.tvEventDate);
         TextView tvLocation = findViewById(R.id.tvEventLocation);
         TextView tvDistrict = findViewById(R.id.tvEventDistrict);
-        
-        tvTitle.setText("Sample Event");
-        tvDescription.setText("This is a sample event description. More details coming soon!");
-        tvDate.setText("Date: 2024-02-15");
-        tvLocation.setText("Location: Mesquel Square");
-        tvDistrict.setText("District: Arada");
+
+        tvTitle.setText(event.getTitle());
+        tvDescription.setText(event.getDescription());
+        tvDate.setText("📅 Date: " + event.getDate());
+        tvLocation.setText("📍 Location: " + event.getLocation());
+        tvDistrict.setText("🏘️ District: " + event.getDistrict());
+    }
+
+    private void setupFavoriteButton(Event event) {
+        Button btnFavorite = findViewById(R.id.btnFavorite);
+        updateFavoriteButtonUI(event.isFavorite());
+
+        btnFavorite.setOnClickListener(v -> {
+            boolean newFavoriteState = !currentEvent.isFavorite();
+            eventViewModel.toggleFavorite(currentEvent.getId(), newFavoriteState);
+        });
+    }
+
+    private void updateFavoriteButtonUI(boolean isFavorite) {
+        Button btnFavorite = findViewById(R.id.btnFavorite);
+        if (isFavorite) {
+            btnFavorite.setText("❤️ Remove Favorite");
+            btnFavorite.setBackgroundColor(getResources().getColor(R.color.red));
+        } else {
+            btnFavorite.setText("🤍 Add Favorite");
+            btnFavorite.setBackgroundColor(getResources().getColor(R.color.gray));
+        }
     }
 }

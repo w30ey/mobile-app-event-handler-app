@@ -38,6 +38,10 @@ public class EventRepository {
     public LiveData<Event> getEventById(int eventId) {
         return eventDao.getEventById(eventId);
     }
+
+    public LiveData<List<Event>> getFavoriteEvents() {
+        return eventDao.getFavoriteEvents();
+    }
     
     public void insert(Event event) {
         executorService.execute(() -> eventDao.insert(event));

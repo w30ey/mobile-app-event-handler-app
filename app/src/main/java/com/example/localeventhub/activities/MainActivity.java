@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnViewEvents = findViewById(R.id.btnViewEvents);
         Button btnEventDetails = findViewById(R.id.btnEventDetails);
         Button btnDebug = findViewById(R.id.btnDebug);
+        Button btnFavorites = findViewById(R.id.btnFavorites);
 
         // Show admin button only for admin users
         if ("admin".equals(userRole)) {
@@ -103,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Pending events: " + events.size(), Toast.LENGTH_SHORT).show();
                 }
             });
+        });
+
+        btnFavorites.setOnClickListener(v -> {
+            Intent intent = new Intent(this, FavoritesActivity.class);
+            startActivity(intent);
         });
     }
     
