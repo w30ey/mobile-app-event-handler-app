@@ -8,14 +8,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.localeventhub.R;
+import com.example.localeventhub.viewmodels.EventViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private int userId;
     private String userRole;
     private String username;
-    
+    private EventViewModel eventViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         
         getUserDataFromIntent();
         setupUI();
+
+        eventViewModel = new ViewModelProvider(this).get(EventViewModel.class);
     }
     
     private void getUserDataFromIntent() {
@@ -45,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
         Button btnCreateEvent = findViewById(R.id.btnCreateEvent);
         Button btnViewEvents = findViewById(R.id.btnViewEvents);
         Button btnEventDetails = findViewById(R.id.btnEventDetails);
-        
+        Button btnDebug = findViewById(R.id.btnDebug);
+
         // Show admin button only for admin users
         if ("admin".equals(userRole)) {
             btnAdminPanel.setVisibility(android.view.View.VISIBLE);
             btnAdminPanel.setOnClickListener(v -> {
-                Toast.makeText(this, "Admin Panel coming soon!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, AdminPanelActivity.class);
+                startActivity(intent);
             });
         } else {
             btnAdminPanel.setVisibility(android.view.View.GONE);
@@ -60,7 +67,11 @@ public class MainActivity extends AppCompatActivity {
         if ("organizer".equals(userRole)) {
             btnCreateEvent.setVisibility(android.view.View.VISIBLE);
             btnCreateEvent.setOnClickListener(v -> {
-                Toast.makeText(this, "Create Event coming soon!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, CreateEditEventActivity.class);
+                intent.putExtra("USER_ID", userId);
+                intent.putExtra("USER_ROLE", userRole);
+                intent.putExtra("MODE", "create");
+                startActivity(intent);
             });
         } else {
             btnCreateEvent.setVisibility(android.view.View.GONE);
@@ -77,6 +88,21 @@ public class MainActivity extends AppCompatActivity {
         btnEventDetails.setOnClickListener(v -> {
             Intent intent = new Intent(this, EventDetailActivity.class);
             startActivity(intent);
+        });
+
+        btnDebug.setOnClickListener(v -> {
+            // Quick debug to see what's in the database
+            eventViewModel.getAllApprovedEvents().observe(this, events -> {
+                if (events != null) {
+                    Toast.makeText(this, "Approved events: " + events.size(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            eventViewModel.getPendingEvents().observe(this, events -> {
+                if (events != null) {
+                    Toast.makeText(this, "Pending events: " + events.size(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
     

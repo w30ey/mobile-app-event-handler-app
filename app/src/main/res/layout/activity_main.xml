@@ -70,6 +70,12 @@
             android:textSize="16sp"
             android:layout_marginBottom="16dp" />
 
+        <Button
+            android:id="@+id/btnDebug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🐞 Debug DB" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
