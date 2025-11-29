@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.localeventfinder">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="Local Event Finder"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:label="@string/app_name"
+        android:theme="@style/Theme.LocalEventHub"
+        tools:targetApi="31">
         
         <activity
             android:name=".activities.LoginActivity"
@@ -17,22 +20,10 @@
             </intent-filter>
         </activity>
         
-        <activity
-            android:name=".activities.MainActivity"
-            android:exported="false" />
-            
-        <activity
-            android:name=".activities.EventDetailsActivity"
-            android:exported="false" />
-            
-        <activity
-            android:name=".activities.FavoritesActivity"
-            android:exported="false" />
-            
-        <activity
-            android:name=".activities.AddEventActivity"
-            android:exported="false" />
-            
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.EventDetailActivity" />
+        <activity android:name=".activities.CreateEditEventActivity" />
+        <activity android:name=".activities.AdminPanelActivity" />
     </application>
 
 </manifest>

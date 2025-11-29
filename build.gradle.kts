@@ -1,4 +1,1 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    alias(libs.plugins.android.application) apply false
-}
+// This file is intentionally left blank to allow the groovy build.gradle file to be used.
