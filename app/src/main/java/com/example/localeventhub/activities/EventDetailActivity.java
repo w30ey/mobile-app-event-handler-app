@@ -53,12 +53,14 @@ public class EventDetailActivity extends AppCompatActivity {
         TextView tvDate = findViewById(R.id.tvEventDate);
         TextView tvLocation = findViewById(R.id.tvEventLocation);
         TextView tvDistrict = findViewById(R.id.tvEventDistrict);
+        TextView tvPrice = findViewById(R.id.tvEventPrice);
 
         tvTitle.setText(event.getTitle());
         tvDescription.setText(event.getDescription());
         tvDate.setText("📅 Date: " + event.getDate());
         tvLocation.setText("📍 Location: " + event.getLocation());
         tvDistrict.setText("🏘️ District: " + event.getDistrict());
+        tvPrice.setText(String.format("ETB %.2f", event.getPrice()));
     }
 
     private void setupFavoriteButton(Event event) {

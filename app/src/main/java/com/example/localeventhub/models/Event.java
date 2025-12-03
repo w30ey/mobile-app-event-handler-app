@@ -13,18 +13,22 @@ public class Event {
     private String date;
     private String location;
     private String district;
+    private double price;
+    private String category;
     @ColumnInfo(name = "organizer_id")
     private int organizerId;
     private boolean approved;
     private boolean favorite;
 
     public Event(String title, String description, String date, String location, 
-                 String district, int organizerId, boolean approved) {
+                 String district, double price, String category, int organizerId, boolean approved) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.location = location;
         this.district = district;
+        this.price = price;
+        this.category = category;
         this.organizerId = organizerId;
         this.approved = approved;
         this.favorite = false;
@@ -42,6 +46,10 @@ public class Event {
     public void setLocation(String location) { this.location = location; }
     public String getDistrict() { return district; }
     public void setDistrict(String district) { this.district = district; }
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
     public int getOrganizerId() { return organizerId; }
     public void setOrganizerId(int organizerId) { this.organizerId = organizerId; }
     public boolean isApproved() { return approved; }

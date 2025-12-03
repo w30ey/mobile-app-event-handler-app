@@ -48,6 +48,14 @@
             android:layout_height="wrap_content"
             android:text="District"
             android:textSize="14sp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvEventPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textSize="14sp"
             android:layout_marginBottom="24dp" />
 
         <Button

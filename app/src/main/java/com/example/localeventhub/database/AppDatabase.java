@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 import com.example.localeventhub.models.Event;
 import com.example.localeventhub.models.User;
 
-@Database(entities = {Event.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {Event.class, User.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract EventDao eventDao();
     public abstract UserDao userDao();
@@ -43,15 +43,15 @@ public abstract class AppDatabase extends RoomDatabase {
                 
                 // Seed both approved and pending events
                 eventDao.insert(new Event("Music Festival", "Annual music festival", "2024-02-15", 
-                        "Mesquel Square", "Arada", 2, true)); // Approved
+                        "Mesquel Square", "Arada", 500.00, "Music", 2, true)); // Approved
                 eventDao.insert(new Event("Art Exhibition", "Local artists exhibition", "2024-02-20", 
-                        "National Museum", "Arada", 2, true)); // Approved
+                        "National Museum", "Arada", 250.00, "Art", 2, true)); // Approved
                 eventDao.insert(new Event("Tech Conference", "Technology innovation conference", "2024-03-01", 
-                        "Sheraton Hotel", "Bole", 2, false)); // Pending approval
+                        "Sheraton Hotel", "Bole", 1500.00, "Tech", 2, false)); // Pending approval
                 eventDao.insert(new Event("Food Festival", "Traditional food tasting", "2024-02-25", 
-                        "Bole Medhanialem", "Bole", 2, false)); // Pending approval
+                        "Bole Medhanialem", "Bole", 100.00, "Food", 2, false)); // Pending approval
                 
-                Log.d("Database", "Sample data seeded successfully - 2 approved, 2 pending events");
+                Log.d("Database", "Sample data seeded successfully - 2 approved, 2 pending events with prices and categories");
             } catch (Exception e) {
                 Log.e("Database", "Error seeding data: " + e.getMessage());
             }

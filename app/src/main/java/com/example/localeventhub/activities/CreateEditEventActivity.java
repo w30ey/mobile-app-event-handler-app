@@ -14,15 +14,16 @@ import com.example.localeventhub.models.Event;
 import com.example.localeventhub.viewmodels.EventViewModel;
 
 public class CreateEditEventActivity extends AppCompatActivity {
-    private EditText etTitle, etDescription, etDate, etLocation;
-    private Spinner spinnerDistrict;
+    private EditText etTitle, etDescription, etDate, etLocation, etPrice;
+    private Spinner spinnerDistrict, spinnerCategory;
     private Button btnSave;
     private EventViewModel eventViewModel;
     private int userId;
     private String mode;
     
     private final String[] DISTRICTS = {"Bole", "Arada", "Yeka", "Nifas Silk"};
-    
+    private final String[] CATEGORIES = {"Music", "Art", "Tech", "Food", "Sport"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class CreateEditEventActivity extends AppCompatActivity {
         initializeViews();
         setupViewModel();
         loadIntentData();
-        setupDistrictSpinner();
+        setupSpinners();
         setupSaveButton();
     }
     
@@ -40,7 +41,9 @@ public class CreateEditEventActivity extends AppCompatActivity {
         etDescription = findViewById(R.id.etEventDescription);
         etDate = findViewById(R.id.etEventDate);
         etLocation = findViewById(R.id.etEventLocation);
+        etPrice = findViewById(R.id.etEventPrice);
         spinnerDistrict = findViewById(R.id.spinnerDistrict);
+        spinnerCategory = findViewById(R.id.spinnerCategory);
         btnSave = findViewById(R.id.btnSaveEvent);
     }
     
@@ -67,14 +70,21 @@ public class CreateEditEventActivity extends AppCompatActivity {
         etDescription.setText("This is a sample event description");
         etDate.setText("2024-03-15");
         etLocation.setText("Sample Location");
+        etPrice.setText("500");
         spinnerDistrict.setSelection(0); // Select first district
+        spinnerCategory.setSelection(0); // Select first category
     }
     
-    private void setupDistrictSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, 
+    private void setupSpinners() {
+        ArrayAdapter<String> districtAdapter = new ArrayAdapter<>(this, 
                 android.R.layout.simple_spinner_item, DISTRICTS);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDistrict.setAdapter(adapter);
+        districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDistrict.setAdapter(districtAdapter);
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, 
+                android.R.layout.simple_spinner_item, CATEGORIES);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(categoryAdapter);
     }
     
     private void setupSaveButton() {
@@ -87,16 +97,20 @@ public class CreateEditEventActivity extends AppCompatActivity {
         String date = etDate.getText().toString().trim();
         String location = etLocation.getText().toString().trim();
         String district = spinnerDistrict.getSelectedItem().toString();
+        String category = spinnerCategory.getSelectedItem().toString();
+        String priceStr = etPrice.getText().toString().trim();
         
-        if (title.isEmpty() || description.isEmpty() || date.isEmpty() || location.isEmpty()) {
+        if (title.isEmpty() || description.isEmpty() || date.isEmpty() || location.isEmpty() || priceStr.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
         
+        double price = Double.parseDouble(priceStr);
+
         // Create new event - organizers need admin approval
         boolean needsApproval = "organizer".equals(getIntent().getStringExtra("USER_ROLE"));
         
-        Event newEvent = new Event(title, description, date, location, district, userId, !needsApproval);
+        Event newEvent = new Event(title, description, date, location, district, price, category, userId, !needsApproval);
         eventViewModel.insert(newEvent);
         
         String message = needsApproval ? 
