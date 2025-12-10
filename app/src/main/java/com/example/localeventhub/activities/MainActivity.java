@@ -6,14 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.localeventhub.R;
 import com.example.localeventhub.viewmodels.EventViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private int userId;
     private String userRole;
     private String username;
@@ -37,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         username = intent.getStringExtra("USERNAME");
         
         TextView tvWelcome = findViewById(R.id.tvWelcome);
-        tvWelcome.setText("Welcome, " + username + "!");
+        tvWelcome.setText(getString(R.string.welcome_message, username));
         
         // Set activity title
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Local Event Hub");
+            getSupportActionBar().setTitle(getString(R.string.main_title));
         }
     }
     
@@ -91,11 +90,16 @@ public class MainActivity extends AppCompatActivity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
             // Navigate back to login
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
+            return true;
+        } else if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

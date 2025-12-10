@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +17,7 @@ import com.example.localeventhub.viewmodels.EventViewModel;
 
 import java.util.ArrayList;
 
-public class AdminPanelActivity extends AppCompatActivity {
+public class AdminPanelActivity extends BaseActivity {
     private EventViewModel eventViewModel;
     private RecyclerView recyclerView;
     private EventAdapter adapter;
@@ -30,7 +29,7 @@ public class AdminPanelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_panel);
 
-        setTitle("Admin Panel - Pending Events");
+        setTitle(R.string.admin_panel_title);
         initializeViews();
         setupViewModel();
     }
@@ -58,22 +57,23 @@ public class AdminPanelActivity extends AppCompatActivity {
             } else {
                 adapter.setEvents(new ArrayList<>());
                 tvEmptyMessage.setVisibility(View.VISIBLE);
+                tvEmptyMessage.setText(R.string.no_pending_events);
             }
         });
     }
 
     private void showApprovalDialog(Event event) {
         new AlertDialog.Builder(this)
-                .setTitle("Approve Event")
-                .setMessage("Do you want to approve the event: " + event.getTitle() + "?")
-                .setPositiveButton("Approve", (dialog, which) -> {
+                .setTitle(R.string.approve_dialog_title)
+                .setMessage(getString(R.string.approve_dialog_message, event.getTitle()))
+                .setPositiveButton(R.string.approve_button, (dialog, which) -> {
                     event.setApproved(true);
                     eventViewModel.update(event);
                 })
-                .setNegativeButton("Reject", (dialog, which) -> {
+                .setNegativeButton(R.string.reject_button, (dialog, which) -> {
                     eventViewModel.delete(event);
                 })
-                .setNeutralButton("Cancel", null)
+                .setNeutralButton(R.string.cancel_button, null)
                 .show();
     }
 }

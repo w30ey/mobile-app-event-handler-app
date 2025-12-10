@@ -6,14 +6,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.localeventhub.R;
 import com.example.localeventhub.models.Event;
 import com.example.localeventhub.viewmodels.EventViewModel;
 
-public class CreateEditEventActivity extends AppCompatActivity {
+public class CreateEditEventActivity extends BaseActivity {
     private EditText etTitle, etDescription, etDate, etLocation, etPrice;
     private Spinner spinnerDistrict, spinnerCategory;
     private Button btnSave;
@@ -45,6 +44,13 @@ public class CreateEditEventActivity extends AppCompatActivity {
         spinnerDistrict = findViewById(R.id.spinnerDistrict);
         spinnerCategory = findViewById(R.id.spinnerCategory);
         btnSave = findViewById(R.id.btnSaveEvent);
+
+        etTitle.setHint(R.string.hint_event_title);
+        etDescription.setHint(R.string.hint_event_description);
+        etDate.setHint(R.string.hint_event_date);
+        etLocation.setHint(R.string.hint_event_location);
+        etPrice.setHint(R.string.hint_event_price);
+        btnSave.setText(R.string.save_event_button);
     }
     
     private void setupViewModel() {
@@ -56,11 +62,11 @@ public class CreateEditEventActivity extends AppCompatActivity {
         mode = getIntent().getStringExtra("MODE");
         
         if ("edit".equals(mode)) {
-            setTitle("Edit Event");
+            setTitle(R.string.edit_event_title);
             // For now, we'll just show create functionality
             populateSampleData();
         } else {
-            setTitle("Create Event");
+            setTitle(R.string.create_event_title);
         }
     }
     
@@ -101,7 +107,7 @@ public class CreateEditEventActivity extends AppCompatActivity {
         String priceStr = etPrice.getText().toString().trim();
         
         if (title.isEmpty() || description.isEmpty() || date.isEmpty() || location.isEmpty() || priceStr.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_fill_all_fields), Toast.LENGTH_SHORT).show();
             return;
         }
         
@@ -114,8 +120,8 @@ public class CreateEditEventActivity extends AppCompatActivity {
         eventViewModel.insert(newEvent);
         
         String message = needsApproval ? 
-            "Event '" + title + "' created and submitted for admin approval!" : 
-            "Event '" + title + "' created successfully!";
+            getString(R.string.event_submitted_for_approval, title) :
+            getString(R.string.event_created_successfully, title);
             
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 

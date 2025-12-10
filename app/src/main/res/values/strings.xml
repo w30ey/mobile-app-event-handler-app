@@ -1,3 +1,78 @@
 <resources>
     <string name="app_name">LocalEventHub</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Local Event Hub</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_demo_credentials">Demo: user1/pass123, organizer1/pass123, admin/admin123</string>
+    <string name="login_error_empty_fields">Please enter username and password</string>
+    <string name="login_error_invalid_credentials">Invalid username or password</string>
+
+    <!-- Main Screen -->
+    <string name="welcome_message">Welcome, %1$s!</string>
+    <string name="main_title">Local Event Hub</string>
+    <string name="card_view_events">View Events</string>
+    <string name="card_favorites">My Favorites</string>
+    <string name="card_create_event">Create Event</string>
+    <string name="card_admin_panel">Admin Panel</string>
+    <string name="quick_actions">Quick Actions</string>
+
+    <!-- Event List Screen -->
+    <string name="event_list_title">Available Events</string>
+    <string name="filter_by_district">Filter by District:</string>
+    <string name="no_events_found">No events found in %1$s</string>
+    <string name="no_events_found_any_district">No events found in any district</string>
+    <string name="found_events_toast">Found %1$d events</string>
+
+    <!-- Event Detail Screen -->
+    <string name="event_detail_title">Event Details</string>
+    <string name="add_favorite_button">🤍 Add Favorite</string>
+    <string name="remove_favorite_button">❤️ Remove Favorite</string>
+    <string name="added_to_favorites">Added to favorites!</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="error_event_not_found">Error: Event not found</string>
+    <string name="event_date_label">📅 Date: %1$s</string>
+    <string name="event_location_label">📍 Location: %1$s</string>
+    <string name="event_district_label">🏘️ District: %1$s</string>
+    <string name="event_price_label">ETB %1$.2f</string>
+
+    <!-- Create/Edit Event Screen -->
+    <string name="create_event_title">Create New Event</string>
+    <string name="edit_event_title">Edit Event</string>
+    <string name="hint_event_title">Event Title</string>
+    <string name="hint_event_description">Event Description</string>
+    <string name="hint_event_date">Event Date (YYYY-MM-DD)</string>
+    <string name="hint_event_location">Event Location</string>
+    <string name="hint_event_price">Price (ETB)</string>
+    <string name="label_select_district">Select District</string>
+    <string name="label_select_category">Select Category</string>
+    <string name="save_event_button">Save Event</string>
+    <string name="error_fill_all_fields">Please fill all fields</string>
+    <string name="event_submitted_for_approval">Event \'%1$s\' created and submitted for admin approval!</string>
+    <string name="event_created_successfully">Event \'%1$s\' created successfully!</string>
+
+    <!-- Admin Panel Screen -->
+    <string name="admin_panel_title">Admin Panel - Pending Events</string>
+    <string name="admin_panel_header">Pending Events for Approval</string>
+    <string name="admin_panel_subtitle">Tap events to approve or reject</string>
+    <string name="no_pending_events">No pending events for approval.</string>
+    <string name="approve_dialog_title">Approve Event</string>
+    <string name="approve_dialog_message">Do you want to approve the event: %1$s?</string>
+    <string name="approve_button">Approve</string>
+    <string name="reject_button">Reject</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="event_approved_toast">Event approved: %1$s</string>
+
+
+    <!-- Favorites Screen -->
+    <string name="favorites_title">My Favorite Events</string>
+    <string name="no_favorite_events">No favorite events yet. Add some events to your favorites!</string>
+    <string name="opening_toast">Opening: %1$s</string>
+
+    <!-- Logout Menu -->
+    <string name="action_logout">Logout</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

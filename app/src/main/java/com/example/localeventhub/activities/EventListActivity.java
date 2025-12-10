@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,7 @@ import com.example.localeventhub.viewmodels.EventViewModel;
 
 import java.util.ArrayList;
 
-public class EventListActivity extends AppCompatActivity {
+public class EventListActivity extends BaseActivity {
     private EventViewModel eventViewModel;
     private RecyclerView recyclerView;
     private EventAdapter adapter;
@@ -35,7 +34,7 @@ public class EventListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
 
-        setTitle("Available Events");
+        setTitle(R.string.event_list_title);
         initializeViews();
         setupViewModel();
         setupDistrictFilter();
@@ -69,6 +68,12 @@ public class EventListActivity extends AppCompatActivity {
             } else {
                 adapter.setEvents(new ArrayList<>());
                 tvEmptyMessage.setVisibility(View.VISIBLE);
+                String selectedDistrict = spinnerDistrictFilter.getSelectedItem().toString();
+                if ("All".equals(selectedDistrict)) {
+                    tvEmptyMessage.setText(R.string.no_events_found_any_district);
+                } else {
+                    tvEmptyMessage.setText(getString(R.string.no_events_found, selectedDistrict));
+                }
             }
         });
     }

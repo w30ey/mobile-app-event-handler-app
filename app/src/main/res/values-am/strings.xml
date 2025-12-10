@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">የአካባቢ ክስተት ማዕከል</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">የአካባቢ ክስተት ማዕከል</string>
+    <string name="username_hint">የተጠቃሚ ስም</string>
+    <string name="password_hint">የይለፍ ቃል</string>
+    <string name="login_button">ይግቡ</string>
+    <string name="login_demo_credentials">ማሳያ: user1/pass123, organizer1/pass123, admin/admin123</string>
+    <string name="login_error_empty_fields">እባክዎ የተጠቃሚ ስም እና የይለፍ ቃል ያስገቡ</string>
+    <string name="login_error_invalid_credentials">የተሳሳተ የተጠቃሚ ስም ወይም የይለፍ ቃል</string>
+
+    <!-- Main Screen -->
+    <string name="welcome_message">እንኳን ደህና መጡ, %1$s!</string>
+    <string name="main_title">የአካባቢ ክስተት ማዕከል</string>
+    <string name="card_view_events">ክስተቶችን ይመልከቱ</string>
+    <string name="card_favorites">የምወዳቸው</string>
+    <string name="card_create_event">ክስተት ይፍጠሩ</string>
+    <string name="card_admin_panel">የአስተዳዳሪ ፓነል</string>
+    <string name="quick_actions">ፈጣን እርምጃዎች</string>
+
+    <!-- Event List Screen -->
+    <string name="event_list_title">ያሉ ክስተቶች</string>
+    <string name="filter_by_district">በክፍለ ከተማ ያጣሩ:</string>
+    <string name="no_events_found">በ \"%1$s\" ምንም ክስተቶች አልተገኙም</string>
+    <string name="no_events_found_any_district">በየትኛውም ክፍለ ከተማ ምንም ክስተቶች አልተገኙም</string>
+    <string name="found_events_toast">%1$d ክስተቶች ተገኝተዋል</string>
+
+    <!-- Event Detail Screen -->
+    <string name="event_detail_title">የክስተት ዝርዝሮች</string>
+    <string name="add_favorite_button">🤍 ወደ ተወዳጆች አክል</string>
+    <string name="remove_favorite_button">❤️ ከተወዳጆች አስወግድ</string>
+    <string name="added_to_favorites">ወደ ተወዳጆች ታክሏል!</string>
+    <string name="removed_from_favorites">ከተወዳጆች ተወግዷል</string>
+    <string name="error_event_not_found">ስህተት: ክስተት አልተገኘም</string>
+    <string name="event_date_label">📅 ቀን: %1$s</string>
+    <string name="event_location_label">📍 ቦታ: %1$s</string>
+    <string name="event_district_label">🏘️ ክፍለ ከተማ: %1$s</string>
+    <string name="event_price_label">ብር %1$.2f</string>
+
+    <!-- Create/Edit Event Screen -->
+    <string name="create_event_title">አዲስ ክስተት ይፍጠሩ</string>
+    <string name="edit_event_title">ክስተት ያርትዑ</string>
+    <string name="hint_event_title">የክስተት ርዕስ</string>
+    <string name="hint_event_description">የክስተት መግለጫ</string>
+    <string name="hint_event_date">የክስተት ቀን (ዓዓ-ወወ-ቀቀ)</string>
+    <string name="hint_event_location">የክስተት ቦታ</string>
+    <string name="hint_event_price">ዋጋ (ብር)</string>
+    <string name="label_select_district">ክፍለ ከተማ ይምረጡ</string>
+    <string name="label_select_category">ምድብ ይምረጡ</string>
+    <string name="save_event_button">አስቀምጥ</string>
+    <string name="error_fill_all_fields">እባክዎ ሁሉንም መስኮች ይሙሉ</string>
+    <string name="event_submitted_for_approval">\'%1$s\' ክስተት ተፈጥሯል እና ለአስተዳዳሪ ማጽደቅ ቀርቧል!</string>
+    <string name="event_created_successfully">\'%1$s\' ክስተት በተሳካ ሁኔታ ተፈጥሯል!</string>
+
+    <!-- Admin Panel Screen -->
+    <string name="admin_panel_title">የአስተዳዳሪ ፓነል - በመጠባበቅ ላይ ያሉ</string>
+    <string name="admin_panel_header">ለማጽደቅ በመጠባበቅ ላይ ያሉ ክስተቶች</string>
+    <string name="admin_panel_subtitle">ለማጽደቅ ወይም ላለመቀበል ክስተቶችን ይንኩ</string>
+    <string name="no_pending_events">ለማጽደቅ በመጠባበቅ ላይ ያሉ ክስተቶች የሉም።</string>
+    <string name="approve_dialog_title">ክስተት አጽድቅ</string>
+    <string name="approve_dialog_message">\"%1$s\"ን ማጽደቅ ይፈልጋሉ?</string>
+    <string name="approve_button">አጽድቅ</string>
+    <string name="reject_button">አትቀበል</string>
+    <string name="cancel_button">ሰርዝ</string>
+    <string name="event_approved_toast">ክስተት ጸድቋል: %1$s</string>
+
+    <!-- Favorites Screen -->
+    <string name="favorites_title">የምወዳቸው ክስተቶች</string>
+    <string name="no_favorite_events">ምንም ተወዳጅ ክስተቶች የሉም። ወደ ተወዳጆችዎ ጥቂት ክስተቶችን ያክሉ!</string>
+    <string name="opening_toast">በመክፈት ላይ: %1$s</string>
+
+    <!-- Logout Menu -->
+    <string name="action_logout">ውጣ</string>
+    <string name="action_settings">ቅንብሮች</string>
+
+</resources>

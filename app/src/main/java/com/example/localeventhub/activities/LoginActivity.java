@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.localeventhub.R;
 import com.example.localeventhub.models.User;
 import com.example.localeventhub.viewmodels.AuthViewModel;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private EditText etUsername, etPassword;
     private Button btnLogin;
     private AuthViewModel authViewModel;
@@ -21,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         
+        setTitle(R.string.login_title);
         initializeViews();
         setupViewModel();
     }
@@ -29,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+
+        etUsername.setHint(R.string.username_hint);
+        etPassword.setHint(R.string.password_hint);
+        btnLogin.setText(R.string.login_button);
         
         btnLogin.setOnClickListener(v -> attemptLogin());
         
@@ -58,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
         
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.login_error_empty_fields), Toast.LENGTH_SHORT).show();
             return;
         }
         

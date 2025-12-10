@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.localeventhub.R;
 import com.example.localeventhub.models.Event;
 import com.example.localeventhub.viewmodels.EventViewModel;
 
-public class EventDetailActivity extends AppCompatActivity {
+public class EventDetailActivity extends BaseActivity {
     private EventViewModel eventViewModel;
     private int eventId;
     private Event currentEvent;
@@ -21,7 +20,7 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
-        setTitle("Event Details");
+        setTitle(R.string.event_detail_title);
         setupViewModel();
         loadEventDetails();
     }
@@ -33,7 +32,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private void loadEventDetails() {
         eventId = getIntent().getIntExtra("EVENT_ID", -1);
         if (eventId == -1) {
-            Toast.makeText(this, "Error: Event not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_event_not_found), Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -57,10 +56,10 @@ public class EventDetailActivity extends AppCompatActivity {
 
         tvTitle.setText(event.getTitle());
         tvDescription.setText(event.getDescription());
-        tvDate.setText("📅 Date: " + event.getDate());
-        tvLocation.setText("📍 Location: " + event.getLocation());
-        tvDistrict.setText("🏘️ District: " + event.getDistrict());
-        tvPrice.setText(String.format("ETB %.2f", event.getPrice()));
+        tvDate.setText(getString(R.string.event_date_label, event.getDate()));
+        tvLocation.setText(getString(R.string.event_location_label, event.getLocation()));
+        tvDistrict.setText(getString(R.string.event_district_label, event.getDistrict()));
+        tvPrice.setText(getString(R.string.event_price_label, event.getPrice()));
     }
 
     private void setupFavoriteButton(Event event) {
@@ -76,10 +75,10 @@ public class EventDetailActivity extends AppCompatActivity {
     private void updateFavoriteButtonUI(boolean isFavorite) {
         Button btnFavorite = findViewById(R.id.btnFavorite);
         if (isFavorite) {
-            btnFavorite.setText("❤️ Remove Favorite");
+            btnFavorite.setText(R.string.remove_favorite_button);
             btnFavorite.setBackgroundColor(getResources().getColor(R.color.red));
         } else {
-            btnFavorite.setText("🤍 Add Favorite");
+            btnFavorite.setText(R.string.add_favorite_button);
             btnFavorite.setBackgroundColor(getResources().getColor(R.color.gray));
         }
     }

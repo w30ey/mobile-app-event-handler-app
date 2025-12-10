@@ -26,6 +26,7 @@
         <activity android:name=".activities.AdminPanelActivity" />
         <activity android:name=".activities.EventListActivity" />
         <activity android:name=".activities.FavoritesActivity" />
+        <activity android:name=".activities.SettingsActivity" />
     </application>
 
 </manifest>
