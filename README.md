@@ -9,3 +9,4 @@ Members : ID
 3. Meklit Yikuno UU92852R
 4. Nathan Abiy UU92863R
 5. Robel Shewangzaw UU92779R
+6. Zantana Redae UUR93108
